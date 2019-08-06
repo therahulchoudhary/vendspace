@@ -1,6 +1,7 @@
 const http = require('http');
 const dbops = require('./db-ops')();
 const { parse } = require('querystring');
+const CONTENT_TYPE = {'Content-Type':'text/JSON'};
 
 
 http.createServer(function (req, res) {
@@ -243,8 +244,19 @@ http.createServer(function (req, res) {
     // update product 
     if(req.url ==='/updateproduct' && req.method === 'POST'){
         collectRequestData(req, body => {
-            let updateproduct_val = {name: body.name,category_id : body.category_id,price : body.price,available_quantity : body.available_quantity,shipping_charges : body.shipping_charges,description: body.description,offer: body.offer,average_rating : body.average_rating,img_id : body.img_id};
-            addproduct(addproduct_val,function(err,result){
+            let updateproduct_val = {id: body.id,name: body.name,category_id : body.category_id,price : body.price,available_quantity : body.available_quantity,shipping_charges : body.shipping_charges,description: body.description,offer: body.offer,average_rating : body.average_rating,img_id : body.img_id};
+            updateproduct(updateproduct_val,function(err,result){
+                  res.writeHead(200,{'Content-Type':'text/JSON'});
+                  res.write(JSON.stringify(result));
+                  res.end(); 
+          });
+      });
+    }
+    // fetch product
+    if(req.url ==='/getproduct' && req.method === 'POST'){
+        collectRequestData(req, body => {
+            let getproduct_val = {id: body.id};
+            getproduct(getproduct_val,function(err,result){
                   res.writeHead(200,{'Content-Type':'text/JSON'});
                   res.write(JSON.stringify(result));
                   res.end(); 
@@ -252,6 +264,9 @@ http.createServer(function (req, res) {
       });
     }
 }).listen(3000); 
+function response(result,res,contenttype){
+    res.writeHead()
+}
 function collectRequestData(request, callback) {
     const FORM_URLENCODED = 'application/json';
     if(true) {

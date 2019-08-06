@@ -189,18 +189,15 @@ exports = module.exports = function(){
         });
     },
     this.updateaddress = function(val,callback){
-        console.log(updateAddressQuery(val));
         con.query(updateAddressQuery(val),function(err,result,fields){
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else if(result.affectedRows){
-                console.log(updateCartQuery(val));
-                callback(null,{updation:1});
+                callback(null,{id : null,status: true,message:message.updated,body:'Address updated successfully.'});
             }
             else{
-                console.log(result);
-                callback(null,{updation:0});
+                callback(null,{id : null,status: false,message:message.updationfailed,body:'Failed to update'});
             }
         });
     },
@@ -208,37 +205,43 @@ exports = module.exports = function(){
         console.log(getShippingQuery(val));
         con.query(getShippingQuery(val), function (err, result, fields) {
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
-            callback(null,result);
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Shipping details fethced'});
+            }
         });   
     },
     this.getreviews = function(val,callback){
         console.log(getReviewQuery(val));
         con.query(getReviewQuery(val), function (err, result, fields) {
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
-            callback(null,result);
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Reviews Fetched'});
+            }
         }); 
     },
     this.getcart = function(val,callback){
         console.log(getCartQuery(val));
         con.query(getCartQuery(val), function (err, result, fields) {
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
-            callback(null,result);
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Cart Details Fetched'});
+            }
         }); 
     },
     this.addproduct = function(val,callback){
         console.log(addProductQuery(val));
         con.query(addProductQuery(val),function(err,result,fields){
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else{
-                callback(null,{insertion:1});
+                callback(null,{id : null,status: true,message:message.inserted,body:'Product added successfully.'});
             }
         });
     },
@@ -246,13 +249,13 @@ exports = module.exports = function(){
         console.log(updateProductQuery(val));
         con.query(updateProductQuery(val),function(err,result,fields){
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else if(result.affectedRows){
-                callback(null,{updation:1});
+                callback(null,{id : null,status: true,message:message.updated,body:'Successfully Updated product.'});
             }
             else{
-                callback(null,{updation:0});
+                callback(null,{id : null,status: false,message:message.updationfailed,body:'Failed to update'});
             }
         });
     },
@@ -260,9 +263,11 @@ exports = module.exports = function(){
         console.log(getProductQuery(val));
         con.query(getProductQuery(val), function (err, result, fields) {
             if(err){
-                callback(err);
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
-            callback(null,result);
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Product Fetched Successfully.'});
+            }
         }); 
     }
 }

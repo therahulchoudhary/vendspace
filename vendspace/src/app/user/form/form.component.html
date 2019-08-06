@@ -1,0 +1,23 @@
+<div class="form_body">
+    <!-- <ul class="button_list"></ul>
+        <li><input type="button" value="SignUp" (click)="showAuth(0)"/></li>
+        <li><input type="button" value="Login" (click)="showAuth(2)"></li>
+    </ul> -->
+    <div class="button_list row">
+        <div class="col-md-6"><input type="button" value="SignUp" (click)="showAuth(0)"/></div>
+        <div class="col-md-6"><input type="button" value="Login" (click)="showAuth(2)"></div>
+    </div>
+    <form>
+        <input type="text" name="full_name" placeholder="Enter Name" *ngIf="fullName"/>
+        <input type="number" name="age" placeholder="Enter Age" *ngIf="age"/>
+        <input type="text" name="email" placeholder="Enter Email" />
+        <input type="password" name="password" placeholder="********" />
+        <input type="number" name="contact" placeholder="Contact" *ngIf="contact"/>
+        <!-- <select>
+            <option>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select> -->
+        <input type="submit" value="Submit"/>
+    </form>
+</div>

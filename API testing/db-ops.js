@@ -37,21 +37,24 @@ exports = module.exports = function(){
         });   
     },
     this.adduser = function(val,callback){  
-        console.log(sql);
         con.query(checkIfExistQuery(val),function(err,result,fields){
             if(err){
+                console.log("checking 1");
                 callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else if(result.length==1){
+                console.log("checking 2");
                 callback(null,{id : null,status: false,message:message.alreadyexists,body:'User Already Exists'});
             }
             else{
                 con.query(addUserQuery(val), function (err, result, fields) {
                     if(err){
+                        console.log("checking 3");
                         callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
                     }
                     else if(result.affectedRows){
-                        callback(null,{id : null,status: false,message:message.inserted,body:'User created successfully'});
+                        console.log("checking 4");
+                        callback(null,{id : result.insertId,status: false,message:message.inserted,body:'User created successfully'});
                     }                    
                 });  
             }

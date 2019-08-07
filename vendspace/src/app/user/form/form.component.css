@@ -1,21 +1,20 @@
 .form_body {
-    width: 30%;
-    background:lightgrey;
+    width: 25%;
     margin:auto;
-    border:1px solid lightgrey;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 250px;
+    padding: 0;
+    padding-bottom: 40px;
+    box-shadow: 0 0 20px darkgrey;
 }
-.form_body h4 {
-    text-align: center;
-    color:#333;
-}
+
 .form_body input[type="text"], .form_body input[type="number"], .form_body input[type="password"] {
     width: 100%;
     margin:10px auto;
-    border: 0;
-    padding: 5px 0;
-    text-align: center;
+    padding: 10px ;
+    text-align:left;
+    border:0;
+    border-bottom: 1px solid #767676;
 }
 select {
     width: 100%;
@@ -34,14 +33,24 @@ select {
     padding:10px 0;
     margin:auto;
 }
+.formbody_inner {
+    width:80%;
+    margin:20px auto;
+}
 .button_list {
-    width: 100%;
+    margin:0;
+    background: darkgrey;
+    border-bottom : 1px solid lightgrey;    
+}
+.button_btn {
     padding: 0;
 }
 .button_list input[type="button"]{
     width: 100%;
     background:transparent;
     text-align: center;
-    padding:10px;
-    border-radius: 8px;
+    padding:25px 0px;
+    border:0;
+    color:white;
+    font-size: 22px;
 }

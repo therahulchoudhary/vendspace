@@ -6,6 +6,7 @@ exports = module.exports = function(){
         return "SELECT email FROM users WHERE email= '"+val.email+"'";
     }
     this.addUserQuery = function(val){
+        console.log("query checking");
         return "INSERT INTO users (full_name,email,password,role,phone,created_at) VALUES ('"+val.name+"','"+val.email+"','"+val.password+"','"+val.role+"','"+val.phone+"',now())";
     }
     this.updatePassQuery = function(val){

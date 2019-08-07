@@ -7,6 +7,11 @@ var fs = require('fs');
 
 
 http.createServer(function (req, res) {
+    
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Request-Method', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
+  res.setHeader('Access-Control-Allow-Headers', '*');
     // auth user
     if(req.url ==='/authuser' && req.method === 'POST'){
         collectRequestData(req, body => {
@@ -20,8 +25,11 @@ http.createServer(function (req, res) {
     // add user
     if(req.url ==='/adduser' && req.method === 'POST'){
         collectRequestData(req, body => {
-              let userdata = { email : body.email , password : body.password, phone : body.phone, name : body.name, role:body.role};
+            console.log("response checking");
+
+              let userdata = { email : body.email , password : body.password, phone : body.contact, name : body.fullName, role : 'USER'};
               adduser(userdata,function(err,result){
+                console.log("response checking");
                 response(result,res,CONTENT_TYPE); 
             });
         });
@@ -196,35 +204,35 @@ http.createServer(function (req, res) {
       });
     }
     // upload files
-    if (req.url == '/fileupload') {
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            var oldpath = files.filetoupload.path;
-            var newpath = './uploads/' + files.filetoupload.name;
-            var data = fields.product_id;
-            fs.writeFile(newpath,data, function (err) {
-                if (err) throw err;
-                res.write('File uploaded and moved!');
-                res.end();
-                console.log('File written!');
-            });
+//     if (req.url == '/fileupload') {
+//         var form = new formidable.IncomingForm();
+//         form.parse(req, function (err, fields, files) {
+//             var oldpath = files.filetoupload.path;
+//             var newpath = './uploads/' + files.filetoupload.name;
+//             var data = fields.product_id;
+//             fs.writeFile(newpath,data, function (err) {
+//                 if (err) throw err;
+//                 res.write('File uploaded and moved!');
+//                 res.end();
+//                 console.log('File written!');
+//             });
 
-            // Delete the file
-            fs.unlink(oldpath, function (err) {
-                if (err) throw err;
-                console.log('File deleted!');
-            });
-        });
-  }else
-  {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
-        res.write('<input type="text name"product_id"><br>');
-        res.write('<input type="file" name="filetoupload"><br>');
-        res.write('<input type="submit">');
-        res.write('</form>');
-        return res.end();
-  }
+//             // Delete the file
+//             fs.unlink(oldpath, function (err) {
+//                 if (err) throw err;
+//                 console.log('File deleted!');
+//             });
+//         });
+//   }else
+//   {
+//         res.writeHead(200, {'Content-Type': 'text/html'});
+//         res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+//         res.write('<input type="text name"product_id"><br>');
+//         res.write('<input type="file" name="filetoupload"><br>');
+//         res.write('<input type="submit">');
+//         res.write('</form>');
+//         return res.end();
+//   }
 
 }).listen(3000); 
 function response(result,res,contenttype){
@@ -266,6 +274,7 @@ function collectRequestData(request, callback) {
             body += chunk.toString();
         });
         request.on('end', () => {
+            console.log(JSON.parse(body));
             callback(JSON.parse(body));
         });
     }

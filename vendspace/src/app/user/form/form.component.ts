@@ -18,7 +18,6 @@ export class FormComponent implements OnInit {
   // Form Fields variables
 
   fullName: boolean;
-  age: boolean;
   contact: boolean;
   // registerForm = new FormGroup({
   //   fullName: new FormControl(''),
@@ -51,6 +50,11 @@ export class FormComponent implements OnInit {
     }
   }
   ngOnInit() {
+    if (JSON.parse(sessionStorage.getItem("currentUser")) === null) {
+      console.log('loggedout')
+      }else{
+      console.log(JSON.parse(sessionStorage.getItem("currentUser")));
+      }
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -64,12 +68,28 @@ export class FormComponent implements OnInit {
     this.form = this.registerForm;
     }
   onSubmit() {
-    
     this.submitted = true;
-    if (this.registerForm.invalid) {
+    if (this.form.invalid) {
         return;
     }
     console.log(JSON.stringify(this.form.value));
-    this.formService.addUser(this.registerForm.value).subscribe(data => console.log(data));
+    // this.formService.userdata(this.registerForm.value,'adduser').subscribe(data => console.log(data));
+    if(this.fullName){
+      this.formService.userdata(this.form.value,'adduser').subscribe(data => {
+        console.log(data);
+        if(data.status){
+          this.formService.sessionlogin(data.body);
+        }
+      });
+
+    }
+    else{
+      this.formService.userdata(this.form.value,'authuser').subscribe(data => {
+        console.log(data);
+        if(data.status){
+          this.formService.sessionlogin(data.body);
+        }
+      });  
+    }
   }
 }

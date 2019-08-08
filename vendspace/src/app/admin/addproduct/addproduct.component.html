@@ -1,0 +1,18 @@
+<div class="add_product col-md-4">
+    <form class="product_form" [formGroup]="addProduct" (ngSubmit)="onSubmit()">
+        <h4>Add Product</h4>
+        <input type="text" placeholder="Enter Product Name" formControlName="productname">
+        <input type="text" placeholder="Enter Product's Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" formControlName="price">
+        <input type="text" placeholder="Enter Available Quantity" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" formControlName="available">
+        <textarea placeholder = "Write your product description" formControlName="description"></textarea>
+        <select formControlName="category">
+            <option value="none" disabled="disable" selected="selected">Select Category</option>
+            <option value="1">Category 1</option>
+            <option value="2">Category 2</option>
+            <option value="3">Category 3</option>
+        </select>
+        <input type="text" style="width:48%;" class="float-right" placeholder="What's the offer" formControlName="offer">
+        <input type="submit" class="btn btn-primary" value="Add Product">
+    </form>
+    <button disabled="disabled" class="btn btn-outline-primary">Upload Product's Image</button>
+</div>

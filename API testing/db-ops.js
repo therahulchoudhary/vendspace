@@ -27,12 +27,18 @@ var message = {
 }
 exports = module.exports = function(){
     this.authuser = function(val,callback){
+        console.log(authUserQuery(val));
         con.query(authUserQuery(val), function (err, result, fields) {
             if(err){
-                callback(err,{id : null,status : false,message :message.notauthenticated,body:'User is not authenicated.'});
+                console.log("aefe");
+                callback(err,{id : null,status : false,message :message.databaseerror,body:'User is not authenicated.'});
+            }
+            else if(result.length){
+                console.log("is it ok");
+                callback(null,{id : null,status: true,message:message.authenticated,body:'Authenticated'});
             }
             else{
-                callback(null,{id : null,status: true,message:message.authenticated,body:'Authenticated'});
+                callback(err,{id : null,status : false,message :message.notauthenticated,body:'User is not authenicated.'});
             }
         });   
     },
@@ -54,7 +60,7 @@ exports = module.exports = function(){
                     }
                     else if(result.affectedRows){
                         console.log("checking 4");
-                        callback(null,{id : result.insertId,status: false,message:message.inserted,body:'User created successfully'});
+                        callback(null,{id : result.insertId,status: true,message:message.inserted,body:'User created successfully'});
                     }                    
                 });  
             }
@@ -270,6 +276,16 @@ exports = module.exports = function(){
             }
             else{
                 callback(null,{id : null,status: true,message:message.fetched,body:'Product Fetched Successfully.'});
+            }
+        }); 
+    },
+    this.getallproduct = function(val,callback) {
+        con.query(getAllProductQuery(val), function (err, result, fields) {
+            if(err){
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
+            }
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:result});
             }
         }); 
     }

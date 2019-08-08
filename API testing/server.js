@@ -7,14 +7,18 @@ var fs = require('fs');
 
 
 http.createServer(function (req, res) {
-    
+  
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Request-Method', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
   res.setHeader('Access-Control-Allow-Headers', '*');
-    // auth user
-    if(req.url ==='/authuser' && req.method === 'POST'){
+  res.setHeader('Content-Type','application/x-www-form-urlencoded');
+  console.log("aga");
+    // This condition is to authenticate user.
+    if(req.url ==='/authuser'){
+        console.log("aut checking")
         collectRequestData(req, body => {
+            console.log("auth chekcing");
               let authval = { email : body.email , password : body.password};
               authuser(authval,function(err,result){
                     response(result,res,CONTENT_TYPE); 
@@ -22,8 +26,9 @@ http.createServer(function (req, res) {
         });
     }
 
-    // add user
-    if(req.url ==='/adduser' && req.method === 'POST'){
+    // This condition is for adding a new user.
+    if(req.url ==='/adduser'){
+        console.log("res checking");
         collectRequestData(req, body => {
             console.log("response checking");
 
@@ -34,7 +39,7 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // update password
+    // This condition is to reset the password.
     if(req.url ==='/updatepass' && req.method === 'POST'){
         collectRequestData(req, body => {
               let passval = { email: body.email , oldpass: body.oldpass, newpass: body.newpass};
@@ -43,16 +48,16 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // add category
+    // This condition is to add a new category of products.
     if(req.url==='/addcategory' && req.method === 'POST'){
         collectRequestData(req, body=>{
-            let catVal = { catName: body.catName };
+            let catVal = { catName: body.categoryname };
             addcategory(catVal,function(err,result){
                 response(result,res,CONTENT_TYPE); 
             });
         });
     }
-    // fetch category
+    // This condition is for getting all the available categories.
     if(req.url==='/getcategory' && req.method === 'GET'){
         collectRequestData(req, body=>{
             getcategory(null,function(err,result){
@@ -60,7 +65,7 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // insert contact
+    // This condition is to add a new contact information.
     if(req.url==='/addcontact' && req.method === 'POST'){
         collectRequestData(req, body=>{
             let contactVal = {contactor:body.contactor,contactorEmail:body.contactorEmail,description:body.description}
@@ -69,7 +74,7 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // get contact 
+    // This condition is to get all the contacted information. 
     if(req.url==='/getcontact' && req.method === 'GET'){
         collectRequestData(req, body=>{
             getcontact(null,function(err,result){
@@ -77,7 +82,8 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // add image
+    // This condition is for adding the url's of the uploaded image.
+
     if(req.url==='/addimage' && req.method === 'POST'){
         collectRequestData(req, body=>{
             let imageVal = {productId : body.productId,imgType : body.imgType,imgURL : body.imgURL };
@@ -86,7 +92,7 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // add reviews
+    // This condition is 
     if(req.url==='/addreview' && req.method === 'POST'){
         collectRequestData(req, body=>{
             let review_val ={user_id : body.user_id,title : body.title,rating : body.rating,review_desc : body.review_desc};
@@ -179,7 +185,7 @@ http.createServer(function (req, res) {
     // add product 
     if(req.url ==='/addproduct' && req.method === 'POST'){
         collectRequestData(req, body => {
-              let addproduct_val = {name: body.name,category_id : body.category_id,price : body.price,available_quantity : body.available_quantity,shipping_charges : body.shipping_charges,description: body.description,offer: body.offer,average_rating : body.average_rating,img_id : body.img_id};
+              let addproduct_val = {name: body.productname,category_id : body.category,price : body.price,available_quantity : body.available,shipping_charges : decideshipping(body.price),description: body.description,offer: body.offer,average_rating : body.average_rating,img_id : "1"};
               addproduct(addproduct_val,function(err,result){
                 response(result,res,CONTENT_TYPE); 
             });
@@ -199,6 +205,14 @@ http.createServer(function (req, res) {
         collectRequestData(req, body => {
             let getproduct_val = {id: body.id};
             getproduct(getproduct_val,function(err,result){
+                response(result,res,CONTENT_TYPE); 
+          });
+      });
+    }
+    // fetch all product
+    if(req.url ==='/getallproduct'){
+        collectRequestData(req, body => {
+            getallproduct(null,function(err,result){
                 response(result,res,CONTENT_TYPE); 
           });
       });
@@ -268,7 +282,7 @@ function statusCode(code){
 }
 function collectRequestData(request, callback) {
     const FORM_URLENCODED = 'application/json';
-    if(true) {
+    // if(true) {
         let body = '';
         request.on('data', chunk => {
             body += chunk.toString();
@@ -277,8 +291,16 @@ function collectRequestData(request, callback) {
             console.log(JSON.parse(body));
             callback(JSON.parse(body));
         });
+    // }
+    // else {
+    //     callback(null);
+    // }
     }
-    else {
-        callback(null);
+function decideshipping(arg){
+    if(arg>500){
+        return 50;
+    }
+    else{
+        return 0;
     }
 }

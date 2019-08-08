@@ -89,4 +89,7 @@ exports = module.exports = function(){
         +"WHERE products.id ='"+val.id+"' GROUP BY products.id "
         +"LIMIT 0,5;"
     }
+    this.getAllProductQuery = function(val){
+        return "SELECT * FROM products";
+    }
 }

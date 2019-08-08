@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Product } from '../models/product';
+
 import { HttpClient,HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { User } from '../models/user';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 
@@ -14,12 +15,12 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class FormService {
+export class ProductsService {
 
   constructor(private http : HttpClient) { }
-  userdata (user: User,uri:string): Observable<any> {
+  productdata (product: Product,uri:string): Observable<any> {
     let target_uri = `http://localhost:3000/${uri}`;
-    return this.http.post<User>(target_uri, user,httpOptions)
+    return this.http.post<Product>(target_uri, product,httpOptions)
     .pipe(
         map((res: any) => {
         return res;
@@ -29,15 +30,7 @@ export class FormService {
         })
     );  
   }
-  sessionlogin(user) {
-    console.log('Logging In')
-    sessionStorage.setItem("currentUser", JSON.stringify(user));
-    // this.loggedInUser$.next(true);
-    }
-  sessionlogout() {
-    sessionStorage.removeItem("currentUser");
-    // this.loggedInUser$.next(false);
-    }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

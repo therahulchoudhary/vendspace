@@ -1,0 +1,18 @@
+.add_category {
+	padding-top: 60px;
+	display: block;
+	width: 60%;
+	margin:auto;
+}
+.add_category input[type="text"] {
+	width: 100%;
+	margin:15px 0;
+	padding:8px;
+	border:2px solid lightgrey;
+	border-radius: 5px;
+	transition:all .5s ease;
+}
+.add_category input[type="text"]:focus {
+	border:2px solid #99b8f0;
+	outline: none;
+}

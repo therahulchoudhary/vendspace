@@ -9,11 +9,10 @@ var fs = require('fs');
 http.createServer(function (req, res) {
   
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Request-Method', '*');
+//   res.setHeader('Access-Control-Request-Method', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
   res.setHeader('Access-Control-Allow-Headers', '*');
   res.setHeader('Content-Type','application/x-www-form-urlencoded');
-  console.log("aga");
     // This condition is to authenticate user.
     if(req.url ==='/authuser'){
         console.log("aut checking")
@@ -31,7 +30,6 @@ http.createServer(function (req, res) {
         console.log("res checking");
         collectRequestData(req, body => {
             console.log("response checking");
-
               let userdata = { email : body.email , password : body.password, phone : body.contact, name : body.fullName, role : 'USER'};
               adduser(userdata,function(err,result){
                 console.log("response checking");
@@ -58,8 +56,9 @@ http.createServer(function (req, res) {
         });
     }
     // This condition is for getting all the available categories.
-    if(req.url==='/getcategory' && req.method === 'GET'){
+    if(req.url==='/getcategory'){
         collectRequestData(req, body=>{
+            console.log("categroy check first");
             getcategory(null,function(err,result){
                 response(result,res,CONTENT_TYPE); 
             });
@@ -75,7 +74,7 @@ http.createServer(function (req, res) {
         });
     }
     // This condition is to get all the contacted information. 
-    if(req.url==='/getcontact' && req.method === 'GET'){
+    if(req.url==='/getcontact'){
         collectRequestData(req, body=>{
             getcontact(null,function(err,result){
                 response(result,res,CONTENT_TYPE);
@@ -184,8 +183,10 @@ http.createServer(function (req, res) {
     }
     // add product 
     if(req.url ==='/addproduct' && req.method === 'POST'){
+        console.log("chekcaklf");
         collectRequestData(req, body => {
-              let addproduct_val = {name: body.productname,category_id : body.category,price : body.price,available_quantity : body.available,shipping_charges : decideshipping(body.price),description: body.description,offer: body.offer,average_rating : body.average_rating,img_id : "1"};
+              let addproduct_val = {name: body.productname,category_id : body.category,price : body.price,available_quantity : body.available,description: body.description,offer: body.offer,average_rating : body.average_rating,img_id : "1"};
+              console.log("is it good");
               addproduct(addproduct_val,function(err,result){
                 response(result,res,CONTENT_TYPE); 
             });
@@ -218,36 +219,27 @@ http.createServer(function (req, res) {
       });
     }
     // upload files
-//     if (req.url == '/fileupload') {
-//         var form = new formidable.IncomingForm();
-//         form.parse(req, function (err, fields, files) {
-//             var oldpath = files.filetoupload.path;
-//             var newpath = './uploads/' + files.filetoupload.name;
-//             var data = fields.product_id;
-//             fs.writeFile(newpath,data, function (err) {
-//                 if (err) throw err;
-//                 res.write('File uploaded and moved!');
-//                 res.end();
-//                 console.log('File written!');
-//             });
+    if (req.url == '/fileupload') {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+            console.log("Data",files.filekey);
+            var oldpath = files.filekey.path;
+            var newpath = './uploads/' + files.filekey.name;
+            var data = fields.product_id;
+            fs.writeFile(newpath,data, function (err) {
+                if (err) throw err;
+                res.write('File uploaded and moved!');
+                res.end();
+                console.log('File written!');
+            });
 
-//             // Delete the file
-//             fs.unlink(oldpath, function (err) {
-//                 if (err) throw err;
-//                 console.log('File deleted!');
-//             });
-//         });
-//   }else
-//   {
-//         res.writeHead(200, {'Content-Type': 'text/html'});
-//         res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
-//         res.write('<input type="text name"product_id"><br>');
-//         res.write('<input type="file" name="filetoupload"><br>');
-//         res.write('<input type="submit">');
-//         res.write('</form>');
-//         return res.end();
-//   }
-
+            // Delete the file
+            fs.unlink(oldpath, function (err) {
+                if (err) throw err;
+                console.log('File deleted!');
+            });
+        });
+  }
 }).listen(3000); 
 function response(result,res,contenttype){
     res.writeHead(statusCode(result.message),contenttype);
@@ -283,14 +275,18 @@ function statusCode(code){
 function collectRequestData(request, callback) {
     const FORM_URLENCODED = 'application/json';
     // if(true) {
-        let body = '';
-        request.on('data', chunk => {
-            body += chunk.toString();
-        });
-        request.on('end', () => {
-            console.log(JSON.parse(body));
+    let body = '';
+    request.on('data', chunk => {
+        body += chunk.toString();
+    });
+    request.on('end', () => {
+        if(body==''){
+            callback((body));
+        }
+        else{
             callback(JSON.parse(body));
-        });
+        }
+    });
     // }
     // else {
     //     callback(null);

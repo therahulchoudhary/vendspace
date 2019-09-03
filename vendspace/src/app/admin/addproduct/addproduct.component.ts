@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, FormsModule} from '@angular/forms';
 import {ProductsService} from '../../middlewayer/products.service';
+import { CategoryService } from 'src/app/middlewayer/category.service';
 
 @Component({
   selector: 'app-addproduct',
@@ -10,9 +11,10 @@ import {ProductsService} from '../../middlewayer/products.service';
 export class AddproductComponent implements OnInit {
 // Form Validation variables
 addProduct : FormGroup;
+allcategories : any[] = [];
 submitted = false;
 
-constructor(private formBuilder: FormBuilder,private productService : ProductsService) {
+constructor(private formBuilder: FormBuilder,private productService : ProductsService,private categoryService : CategoryService) {
 }
 ngOnInit() {
   this.addProduct = this.formBuilder.group({
@@ -23,13 +25,16 @@ ngOnInit() {
     category: ['',Validators.required],
     offer:['',Validators.required]
   });
+  this.categoryService.categorydata(null,'getcategory').subscribe(data=>{
+    this.allcategories =data.body; 
+    console.log(this.allcategories);
+  });
   }
 onSubmit() {
   
   this.submitted = true;
   
   if (this.addProduct.invalid) {
-    
       return;
   }
   console.log("is av");

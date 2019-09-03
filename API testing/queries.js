@@ -15,13 +15,13 @@ exports = module.exports = function(){
     this.addCategoryQuery = function(val){
         return "INSERT INTO categories (name,created_at) VALUES ('"+val.catName+"',now())";
     }
-    this.getCategoryQuery = function(){
+    this.getCategoryQuery = function(val){
         return "SELECT id,name FROM categories";
     }
     this.addContactQuery = function(val){
         return "INSERT INTO contact (name,email,description,created_at) VALUES ('"+val.contactor+"','"+val.contactorEmail+"','"+val.description+"',now())";
     }
-    this.getContactQuery = function(){
+    this.getContactQuery = function(val){
         return "SELECT * FROM contact";
     }
     this.addImageQuery = function(val){
@@ -55,12 +55,13 @@ exports = module.exports = function(){
         +" ON shipping_details.address_id=address.id"
         +" WHERE shipping_details.address_id ='"+val.shipping_address_id+"' AND address.id ='"+val.address_id+"';";
     }
-    this.getReviewQuery = function(val){
-        return "SELECT users.full_name,title,rating,description "
-        +"FROM reviews "
-        +"JOIN users "
-        +"ON reviews.user_id =users.id "
-        +"WHERE product_id ='"+val.product_id+"' LIMIT 0,10;";
+    this.getAllReviewQuery = function(val){
+        // return "SELECT users.full_name,title,rating,description "
+        // +"FROM reviews "
+        // +"JOIN users "
+        // +"ON reviews.user_id =users.id "
+        // +"WHERE product_id ='"+val.product_id+"' LIMIT 0,10;";
+        return "SELECT * from reviews";
     }
     this.getCartQuery = function(val){
         return "SELECT products.name,products.price,image.img_url,quantity"
@@ -74,7 +75,7 @@ exports = module.exports = function(){
         +" LIMIT 0,5;";
     }
     this.addProductQuery = function(val){
-        return "INSERT INTO products (category_id,name,price,available_quantity,shipping_charges,description,offer,average_rating,img_id,created_at) VALUES ('"+val.category_id+"','"+val.name+"','"+val.price+"','"+val.available_quantity+"','"+val.shipping_charges+"','"+val.description+"','"+val.offer+"','"+val.average_rating+"','"+val.img_id+"',now())";
+        return "INSERT INTO products (category_id,name,price,available_quantity,description,offer,average_rating,img_id,created_at) VALUES ('"+val.category_id+"','"+val.name+"','"+val.price+"','"+val.available_quantity+"','"+val.description+"','"+val.offer+"','"+val.average_rating+"','"+val.img_id+"',now())";
     } 
     this.updateProductQuery = function(val){
         return "UPDATE products SET category_id = '"+val.category_id+"',name ='"+val.name+"',price='"+val.price+"',available_quantity='"+val.available_quantity+"',shipping_charges='"+val.shipping_charges+"',description='"+val.description+"',offer='"+val.offer+"',average_rating='"+val.average_rating+"',img_id ='"+val.img_id+"' WHERE id ='"+val.id+"';";
@@ -89,7 +90,7 @@ exports = module.exports = function(){
         +"WHERE products.id ='"+val.id+"' GROUP BY products.id "
         +"LIMIT 0,5;"
     }
-    this.getAllProductQuery = function(val){
-        return "SELECT * FROM products";
+    this.getAllProductQuery = function(){
+        return "SELECT products.*,image.img_url,categories.name as category_name FROM products INNER JOIN categories ON products.category_id=categories.id INNER JOIN image ON products.img_id = image.id;"
     }
-}
+}   

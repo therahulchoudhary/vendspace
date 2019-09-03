@@ -7,9 +7,7 @@
         <textarea placeholder = "Write your product description" formControlName="description"></textarea>
         <select formControlName="category">
             <option value="none" disabled="disable" selected="selected">Select Category</option>
-            <option value="1">Category 1</option>
-            <option value="2">Category 2</option>
-            <option value="3">Category 3</option>
+            <option value="1" *ngFor="let c of allcategories">{{c.name}}</option>
         </select>
         <input type="text" style="width:48%;" class="float-right" placeholder="What's the offer" formControlName="offer">
         <input type="submit" class="btn btn-primary" value="Add Product">

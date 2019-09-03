@@ -90,12 +90,14 @@ exports = module.exports = function(){
         });
     },
     this.getcategory = function(val,callback){
-        con.query(getCategoryQuery(),function(err,result,fields){
+        console.log(val);
+        con.query(getCategoryQuery(val),function(err,result,fields){
+            console.log(getCategoryQuery());
             if(err){
                 callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else{
-                callback(null,{id : null,status: true,message:message.fetched,body:'Categories fetched successfully'});
+                callback(null,{id : null,status: true,message:message.fetched,body:result});
             }
         });
     },
@@ -110,12 +112,12 @@ exports = module.exports = function(){
         });
     },
     this.getcontact = function(val,callback){
-        con.query(getContactQuery(),function(err,result,fields){
+        con.query(getContactQuery(val),function(err,result,fields){
             if(err){
                 callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else{
-                callback(null,{id : null,status: true,message:message.fetched,body:'Contact Fetched Successfully.'});
+                callback(null,{id : null,status: true,message:message.fetched,body:result});
             }
         });
     },
@@ -222,13 +224,12 @@ exports = module.exports = function(){
         });   
     },
     this.getreviews = function(val,callback){
-        console.log(getReviewQuery(val));
-        con.query(getReviewQuery(val), function (err, result, fields) {
+        con.query(getAllReviewQuery(val), function (err, result, fields) {
             if(err){
                 callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }
             else{
-                callback(null,{id : null,status: true,message:message.fetched,body:'Reviews Fetched'});
+                callback(null,{id : null,status: true,message:message.fetched,body:result});
             }
         }); 
     },
@@ -280,7 +281,7 @@ exports = module.exports = function(){
         }); 
     },
     this.getallproduct = function(val,callback) {
-        con.query(getAllProductQuery(val), function (err, result, fields) {
+        con.query(getAllProductQuery(), function (err, result, fields) {
             if(err){
                 callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
             }

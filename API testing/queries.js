@@ -15,6 +15,9 @@ exports = module.exports = function(){
     this.updatePassQuery = function(val){
         return "UPDATE users SET `password` =  '"+val.newpass+"' WHERE email = '"+val.email+"' AND password ='"+val.oldpass+"'";
     }
+    this.deleteUserQuery = function(val){
+        return "DELETE FROM users WHERE id='"+val.id+"'";
+    }
     this.addCategoryQuery = function(val){
         return "INSERT INTO categories (name,created_at) VALUES ('"+val.catName+"',now())";
     }

@@ -79,6 +79,26 @@ exports = module.exports = function(){
             }
         });
     },
+    this.getallusers = function(val,callback){
+        con.query(getAllUsersQuery(val),function(err,result,fields){
+            if(err){
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
+            }
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:result});
+            }
+        });
+    },
+    this.deleteuser = function(val,callback){
+        con.query(deleteUserQuery(val),function(err,result,fields){
+            if(err){
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
+            }
+            else{
+                callback(null,{id : null,status: true,message:message.inserted,body:'User Deleted successfully.'});
+            }
+        });
+    }
     this.addcategory = function(val,callback){
         con.query(addCategoryQuery(val),function(err,result,fields){
             if(err){

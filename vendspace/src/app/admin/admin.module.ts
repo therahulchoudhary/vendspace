@@ -8,11 +8,13 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AllProductsComponent } from './all-products/all-products.component';
 import { AllContactsComponent } from './all-contacts/all-contacts.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 
 
 @NgModule({
-  declarations: [NavigationComponent, AddproductComponent, AddcategoryComponent, AdminDashboardComponent, AllProductsComponent, AllContactsComponent, AllReviewsComponent],
+  declarations: [NavigationComponent, AddproductComponent, AddcategoryComponent, AdminDashboardComponent, AllProductsComponent, AllContactsComponent, AllReviewsComponent, AllUsersComponent, UpdateProductComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule
@@ -24,7 +26,9 @@ import { AllReviewsComponent } from './all-reviews/all-reviews.component';
     AdminDashboardComponent,
     AllProductsComponent,
     AllContactsComponent,
-    AllReviewsComponent
+    AllReviewsComponent,
+    AllUsersComponent,
+    UpdateProductComponent
   ]
 })
 export class AdminModule { }

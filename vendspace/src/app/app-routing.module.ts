@@ -9,6 +9,8 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
 import { AllProductsComponent } from './admin/all-products/all-products.component'; 
 import { AllContactsComponent } from './admin/all-contacts/all-contacts.component';
 import { AllReviewsComponent} from './admin/all-reviews/all-reviews.component';
+import { AllUsersComponent } from './admin/all-users/all-users.component';
+import { UpdateProductComponent } from './admin/update-product/update-product.component';
 
 const routes: Routes = [
   {path:'addcategory',component : AddcategoryComponent},
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path:'',component:UserDashboardComponent},
   {path:'allproducts',component:AllProductsComponent},
   {path:'allcontacts',component:AllContactsComponent},
-  {path:'allreviews',component:AllReviewsComponent}
+  {path:'allreviews',component:AllReviewsComponent},
+  {path:'allusers' ,component:AllUsersComponent},
+  {path:'updateproduct',component:UpdateProductComponent}
 ];
 
 @NgModule({

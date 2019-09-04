@@ -46,6 +46,23 @@ http.createServer(function (req, res) {
             });
         });
     }
+    // This condition is to get all users.
+    if(req.url ==='/getallusers'){
+        collectRequestData(req, body => {
+            getallusers(null,function(err,result){
+                response(result,res,CONTENT_TYPE);
+            });
+        });
+    }
+    // This condition is to delete a user.
+    if(req.url ==='/deleteuser'){
+        collectRequestData(req, body => {
+            let delete_user_val = {id : body.id};
+            deleteuser(delete_user_val,function(err,result){
+                response(result,res,CONTENT_TYPE);
+            });
+        });
+    }
     // This condition is to add a new category of products.
     if(req.url==='/addcategory' && req.method === 'POST'){
         collectRequestData(req, body=>{

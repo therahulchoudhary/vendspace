@@ -25,7 +25,7 @@
           <td>{{p.offer}}</td>
           <td>{{p.average_rating}}</td>
           <td>{{p.img_url}}</td>
-          <td><button>&#10005;</button></td>
+          <td><button (click)="deleteProduct(p)">&#10005;</button></td>
         </tr>
       </tbody>
     </table>

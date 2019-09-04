@@ -1,4 +1,7 @@
 exports = module.exports = function(){
+    this.getAllUsersQuery = function(val){
+        return "SELECT * FROM users;"
+    }
     this.authUserQuery = function(val){
         return "SELECT full_name,email FROM users WHERE email ='"+val.email+"' AND password ='"+val.password+"'";
     }
@@ -23,6 +26,9 @@ exports = module.exports = function(){
     }
     this.getContactQuery = function(val){
         return "SELECT * FROM contact";
+    }
+    this.deleteContactQuery = function(val){
+        return "DELETE FROM contact WHERE id='"+val.id+"'";
     }
     this.addImageQuery = function(val){
         return "INSERT INTO image (product_id,img_type,img_url,created_at) VALUES ('"+val.productId+"','"+val.imgType+"','"+val.imgURL+"',now())";
@@ -63,6 +69,9 @@ exports = module.exports = function(){
         // +"WHERE product_id ='"+val.product_id+"' LIMIT 0,10;";
         return "SELECT * from reviews";
     }
+    this.deleteReviewQuery = function(val){
+        return "DELETE FROM reviews WHERE id='"+val.id+"'";
+    }
     this.getCartQuery = function(val){
         return "SELECT products.name,products.price,image.img_url,quantity"
         +" FROM cart"
@@ -92,5 +101,8 @@ exports = module.exports = function(){
     }
     this.getAllProductQuery = function(){
         return "SELECT products.*,image.img_url,categories.name as category_name FROM products INNER JOIN categories ON products.category_id=categories.id INNER JOIN image ON products.img_id = image.id;"
+    }
+    this.deleteProductQuery = function(val){
+        return "DELETE FROM products WHERE id='"+val.id+"'";
     }
 }   

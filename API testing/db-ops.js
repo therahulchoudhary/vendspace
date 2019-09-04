@@ -121,6 +121,16 @@ exports = module.exports = function(){
             }
         });
     },
+    this.deletecontact = function(val,callback){
+        con.query(deleteContactQuery(val),function(err,result,fields){
+            if(err){
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
+            }
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Contact Successfully deleted.'});
+            }
+        });
+    }
     this.addimage = function(val,callback){
         con.query(addImageQuery(val),function(err,result,fields){
             if(err){
@@ -233,6 +243,16 @@ exports = module.exports = function(){
             }
         }); 
     },
+    this.deletereview = function(val,callback){
+        con.query(deleteReviewQuery(val),function(err,result,fields){
+            if(err){
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
+            }
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Review Successfully deleted.'});
+            }
+        });
+    },
     this.getcart = function(val,callback){
         console.log(getCartQuery(val));
         con.query(getCartQuery(val), function (err, result, fields) {
@@ -280,6 +300,16 @@ exports = module.exports = function(){
             }
         }); 
     },
+    this.deleteproduct = function(val,callback){
+        con.query(deleteProductQuery(val),function(err,result,fields){
+            if(err){
+                callback(err,{id : null,status: false,message:message.databaseerror,body:'Database Error'});
+            }
+            else{
+                callback(null,{id : null,status: true,message:message.fetched,body:'Product Deleted Successfully.'});
+            }
+        });
+    }
     this.getallproduct = function(val,callback) {
         con.query(getAllProductQuery(), function (err, result, fields) {
             if(err){

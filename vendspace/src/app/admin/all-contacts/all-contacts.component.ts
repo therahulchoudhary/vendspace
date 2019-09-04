@@ -11,10 +11,18 @@ export class AllContactsComponent implements OnInit {
   constructor(private contactService : ContactsService) { }
 
   ngOnInit() {
+    this.fetchAllContacts();
+  }
+  deleteContact(value){
+    this.contactService.contactdata(value,'deletecontact').subscribe(data=>{
+      this.fetchAllContacts();
+      console.log(data);
+    });
+  }
+  fetchAllContacts(){
     this.contactService.contactdata(null,'getcontact').subscribe(data=>{
       this.allcontacts =data.body; 
       console.log(this.allcontacts);
     });
   }
-
 }

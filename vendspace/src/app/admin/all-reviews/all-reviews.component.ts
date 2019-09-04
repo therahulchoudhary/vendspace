@@ -11,10 +11,18 @@ export class AllReviewsComponent implements OnInit {
   constructor(private reviewsService : ReviewsService) { }
 
   ngOnInit() {
+    this.fetchAllReviews();
+  }
+  deleteReview(value){
+    this.reviewsService.reviewsdata(value,'deletereview').subscribe(data=>{
+      this.fetchAllReviews();
+      console.log(data.body);
+    });
+  }
+  fetchAllReviews(){
     this.reviewsService.reviewsdata(null,'getreviews').subscribe(data=>{
       this.allreviews =data.body; 
       console.log(this.allreviews);
     });
   }
-
 }

@@ -15,7 +15,7 @@
             <td>{{r.description}}</td>
             <td>{{r.rating}}</td>
             <td>{{r.product_id}}</td>
-            <td><button>&#10005;</button></td>
+            <td><button (click)="deleteReview(r)">&#10005;</button></td>
         </tr>
         </tbody>
     </table>

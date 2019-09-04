@@ -81,6 +81,15 @@ http.createServer(function (req, res) {
             });
         });
     }
+    // This condition is to delete contact information.
+    if(req.url==='/deletecontact'){
+        collectRequestData(req, body=>{
+            let deleteVal = {id : body.id};
+            deletecontact(deleteVal,function(err,result){
+                response(result,res,CONTENT_TYPE);
+            });
+        });
+    }
     // This condition is for adding the url's of the uploaded image.
 
     if(req.url==='/addimage' && req.method === 'POST'){
@@ -91,7 +100,7 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // This condition is 
+    // This condition is to add any review.
     if(req.url==='/addreview' && req.method === 'POST'){
         collectRequestData(req, body=>{
             let review_val ={user_id : body.user_id,title : body.title,rating : body.rating,review_desc : body.review_desc};
@@ -99,6 +108,24 @@ http.createServer(function (req, res) {
                 response(result,res,CONTENT_TYPE);
             });
         });
+    }
+    // This condition is to get all reviews. 
+    if(req.url ==='/getreviews' && req.method === 'POST'){
+        collectRequestData(req, body => {
+              let reviews_val = {product_id : body.product_id};
+              getreviews(reviews_val,function(err,result){
+                response(result,res,CONTENT_TYPE); 
+            });
+        });
+    }
+    // This condition is to delete a review.
+    if(req.url==='/deletereview'){
+        collectRequestData(req, body => {
+            let delete_review_val = {id : body.id};
+            deletereview(delete_review_val,function(err,result){
+                response(result,res,CONTENT_TYPE);
+            });
+        })
     }
     // add address 
     if(req.url==='/addaddress' && req.method === 'POST'){
@@ -163,15 +190,6 @@ http.createServer(function (req, res) {
             });
         });
     }
-    // get reviews 
-    if(req.url ==='/getreviews' && req.method === 'POST'){
-        collectRequestData(req, body => {
-              let reviews_val = {product_id : body.product_id};
-              getreviews(reviews_val,function(err,result){
-                response(result,res,CONTENT_TYPE); 
-            });
-        });
-    }
     // get cart 
     if(req.url ==='/getcart' && req.method === 'POST'){
         collectRequestData(req, body => {
@@ -214,6 +232,15 @@ http.createServer(function (req, res) {
     if(req.url ==='/getallproduct'){
         collectRequestData(req, body => {
             getallproduct(null,function(err,result){
+                response(result,res,CONTENT_TYPE); 
+          });
+      });
+    }
+    // This condition contains the delete product operation.
+    if(req.url ==='/deleteproduct'){
+        collectRequestData(req, body => {
+            delete_product_val = {id : body.id};
+            deleteproduct(delete_product_val,function(err,result){
                 response(result,res,CONTENT_TYPE); 
           });
       });

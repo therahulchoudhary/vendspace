@@ -10,16 +10,16 @@
 				</div>
 			</div>
 			<ul class="sidebar_list">
-				<li><a href="">All Users<span class="arrow">&#x2192;</span></a></li>
-				<li><a href="">All Products <span class="arrow">&#x2192;</span></a></li>
-				<li><a href="">Add Products <span class="arrow">&#x2192;</span></a></li>
-				<li><a href="">Add Category <span class="arrow">&#x2192;</span></a></li>
-				<li><a href="">All Contacts <span class="arrow">&#x2192;</span></a></li>
-				<li><a href="">All Reviews <span class="arrow">&#x2192;</span></a></li>
+				<li><a routerLink="allusers">All Users<span class="arrow">&#x2192;</span></a></li>
+				<li><a routerLink="allproducts">All Products <span class="arrow">&#x2192;</span></a></li>
+				<li><a routerLink="addproduct">Add Products <span class="arrow">&#x2192;</span></a></li>
+				<li><a routerLink="addcategory">Add Category <span class="arrow">&#x2192;</span></a></li>
+				<li><a routerLink="allcontacts">All Contacts <span class="arrow">&#x2192;</span></a></li>
+				<li><a routerLink="allreviews">All Reviews <span class="arrow">&#x2192;</span></a></li>
 			</ul>
 		</div>
 		<div class="col-md-10 sidebody">
-			<div class="sidebody_inner">
+			<!-- <div class="sidebody_inner">
 				<div class="add_product">
 					<form class="product_form" [formGroup]="product_form">
 						<h4>Add Product</h4>
@@ -45,7 +45,8 @@
 						<input type="submit" class="btn btn-primary" value="Add Category">
 					</form>
 				</div>
-			</div>
+			</div> -->
+			<router-outlet></router-outlet>
 		</div>
 	</div>
 </div>

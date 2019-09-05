@@ -2,7 +2,7 @@
     width: 25%;
     margin:auto;
     border-radius: 10px;
-    margin-top: 250px;
+    margin-top: 150px;
     padding: 0;
     padding-bottom: 40px;
     box-shadow: 0 0 20px darkgrey;
@@ -53,4 +53,8 @@ select {
     border:0;
     color:white;
     font-size: 22px;
+}
+.back_to_home {
+    text-align:center;
+    padding: 40px 60px;
 }

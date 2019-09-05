@@ -1,4 +1,4 @@
-<div class="container" style="overflow: scroll">          
+<div>          
     <table class="table table-bordered" >
         <thead>
             <th>Review Id</th>
@@ -15,7 +15,7 @@
             <td>{{r.description}}</td>
             <td>{{r.rating}}</td>
             <td>{{r.product_id}}</td>
-            <td><button (click)="deleteReview(r)">&#10005;</button></td>
+            <td><button (click)="deleteReview(r)" class="btn btn-outline-primary">&#10005;</button></td>
         </tr>
         </tbody>
     </table>

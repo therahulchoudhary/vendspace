@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../middlewayer/category.service';
 
 @Component({
   selector: 'app-navigation',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-
-  constructor() { }
+  allcategories : any[] =[];
+  constructor(private categoryservice : CategoryService) { }
 
   ngOnInit() {
+    this.fetchallcategories();
   }
-
+  fetchallcategories(){
+    this.categoryservice.categorydata(null,'getcategory').subscribe(data=>{
+      this.allcategories = data.body;
+    }); 
+  }
 }

@@ -1,4 +1,4 @@
-<div class="container" style="overflow: scroll">          
+<div>          
     <table class="table table-bordered" >
         <thead>
         <tr>
@@ -14,7 +14,7 @@
             <td>{{c.name}}</td>
             <td>{{c.email}}</td>
             <td>{{c.description}}</td>
-            <td><button (click)="deleteContact(c)">&#10005;</button></td>
+            <td><button (click)="deleteContact(c)" class="btn btn-primary">&#10005;</button></td>
         </tr>
         </tbody>
     </table>

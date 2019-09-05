@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo"><a href="#">Sublime.</a></div>
-                        <nav class="main_nav">
+                        <div class="logo"><a href="#">VendSpace</a></div>
+                        <nav class="main_nav float-right">
                             <ul>
                                 <li>
                                     <a href="index.html">Home</a>
@@ -13,26 +13,22 @@
                                 <li class="hassubs">
                                     <a href="categories.html">Categories</a>
                                     <ul>
-                                        <li><a href="categories.html">Mobile Accessories</a></li>
-                                        <li><a href="categories.html">Household Electronics</a></li>
-                                        <li><a href="categories.html">Electronics</a></li>
+                                        <li *ngFor="let c of allcategories"><a href="categories.html">{{c.name}}</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">Offers</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a routerLink="/contact">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="header_extra ml-auto">
                             <div class="shopping_cart" style="padding:0 20px;">
-                                <a href="#form">
-                                          <svg class="svg-icon" viewBox="0 0 20 20">
-                                                <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
-                                            </svg>
+                                <a routerLink="/form">
+                                    <svg class="svg-icon" viewBox="0 0 20 20">
+                                        <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+                                    </svg>
                                 </a>
                             </div>
                             <div class="shopping_cart">
-                                <a href="null">
+                                <a>
                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
                                         <g>
@@ -74,4 +70,44 @@
             </div>
         </div>
     </div>
+    <div class="search_panel trans_300">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
+                        <!-- <form action="#"> -->
+                            <input type="text" class="search_input" placeholder="Search" required="required">
+                        <!-- </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
+<div class="menu menu_mm trans_300">
+    <div class="menu_container menu_mm">
+        <div class="page_menu_content">          
+            <div class="page_menu_search menu_mm">
+                <!-- <form action="#"> -->
+                    <input type="search" required="required" class="page_menu_search_input menu_mm" placeholder="Search for products...">
+                <!-- </form> -->
+            </div>
+            <ul class="page_menu_nav menu_mm">
+                <li class="page_menu_item has-children menu_mm">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="page_menu_item has-children menu_mm">
+                    <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
+                    <ul class="page_menu_selection menu_mm">
+                        <li class="page_menu_item menu_mm" *ngFor="let c of allcategories"><a href="categories.html"><i class="fa fa-angle-down"></i>{{c.name}}</a></li>
+                    </ul>
+                </li>
+                <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
+                <li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
+                <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+</div>

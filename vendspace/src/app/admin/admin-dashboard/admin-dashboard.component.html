@@ -10,42 +10,16 @@
 				</div>
 			</div>
 			<ul class="sidebar_list">
-				<li><a routerLink="allusers">All Users<span class="arrow">&#x2192;</span></a></li>
-				<li><a routerLink="allproducts">All Products <span class="arrow">&#x2192;</span></a></li>
-				<li><a routerLink="addproduct">Add Products <span class="arrow">&#x2192;</span></a></li>
-				<li><a routerLink="addcategory">Add Category <span class="arrow">&#x2192;</span></a></li>
-				<li><a routerLink="allcontacts">All Contacts <span class="arrow">&#x2192;</span></a></li>
-				<li><a routerLink="allreviews">All Reviews <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="dashboard"><a>Dashboard<span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allusers"><a>Users<span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allproducts"><a>Products <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="addproduct"><a>Add Products <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="addcategory"><a>Add Category <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allcontacts"><a>Contacts <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allreviews"><a>Reviews <span class="arrow">&#x2192;</span></a></li>
 			</ul>
 		</div>
 		<div class="col-md-10 sidebody">
-			<!-- <div class="sidebody_inner">
-				<div class="add_product">
-					<form class="product_form" [formGroup]="product_form">
-						<h4>Add Product</h4>
-						<input type="text" placeholder="Enter Product Name">
-						<input type="text" placeholder="Enter Product's Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-						<input type="text" placeholder="Enter Available Quantity" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-						<textarea placeholder = "Write your product description"></textarea>
-						<select>
-							<option value="none" disabled="disable" selected="selected">Select Category</option>
-							<option value="category_one">Category 1</option>
-							<option value="category_two">Category 2</option>
-							<option value="category_three">Category 3</option>
-						</select>
-						<input type="text" style="width:48%;" class="float-right" placeholder="What's the offer">
-						<input type="submit" class="btn btn-primary" value="Add Product">
-					</form>
-					<button disabled="disabled" class="btn btn-outline-primary">Upload Product's Image</button>
-				</div>
-				<div class="add_category">
-					<form class="category_form" [formGroup]="cat_form">
-						<h4>Add Category</h4>
-						<input type="text" placeholder="Add category">
-						<input type="submit" class="btn btn-primary" value="Add Category">
-					</form>
-				</div>
-			</div> -->
 			<router-outlet></router-outlet>
 		</div>
 	</div>

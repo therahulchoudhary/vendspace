@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../middlewayer/products.service';
+import { CategoryService } from '../../middlewayer/category.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,16 +7,15 @@ import { ProductsService } from '../../middlewayer/products.service';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
-  allproducts : any[] =[];
-  constructor(private productservice : ProductsService) { }
+  allcategories : any[] =[];
+  constructor(private categoryservice : CategoryService) { }
 
   ngOnInit() {
-    this.fetchallproducts();
+    this.fetchallcategories();
   }
-  fetchallproducts(){
-    this.productservice.productdata(null,'getallproduct').subscribe(data=>{
-      this.allproducts = data.body;
-      console.log(data.body);
-    })
+  fetchallcategories(){
+    this.categoryservice.categorydata(null,'getcategory').subscribe(data=>{
+      this.allcategories = data.body;
+    }); 
   }
 }

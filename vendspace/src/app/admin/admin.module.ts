@@ -11,8 +11,10 @@ import { AllContactsComponent } from './all-contacts/all-contacts.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 export const ROUTES: Routes = [
-  { path: '', redirectTo: 'admindashboard',pathMatch:'full' },
+  { path: '', redirectTo: 'dashboard',pathMatch:'full' },
   {
   path: '', component: AdminDashboardComponent,
   children: [
@@ -22,13 +24,14 @@ export const ROUTES: Routes = [
   { path: 'allcontacts', component: AllContactsComponent },
   { path: 'allproducts', component: AllProductsComponent },
   { path: 'allreviews', component: AllReviewsComponent },
-  { path: '**', redirectTo:'' },
+  { path: 'dashboard', component: DashboardComponent},
+  { path: '**', redirectTo:'' }
   ]
   }
   ];
 
 @NgModule({
-  declarations: [NavigationComponent, AddproductComponent, AddcategoryComponent, AdminDashboardComponent, AllProductsComponent, AllContactsComponent, AllReviewsComponent, AllUsersComponent, UpdateProductComponent],
+  declarations: [NavigationComponent, AddproductComponent, AddcategoryComponent, AdminDashboardComponent, AllProductsComponent, AllContactsComponent, AllReviewsComponent, AllUsersComponent, UpdateProductComponent, DashboardComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -43,7 +46,8 @@ export const ROUTES: Routes = [
     AllContactsComponent,
     AllReviewsComponent,
     AllUsersComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    DashboardComponent
   ]
 })
 export class AdminModule { }

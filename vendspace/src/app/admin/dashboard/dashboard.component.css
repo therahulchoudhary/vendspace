@@ -1,0 +1,32 @@
+.block_details_row {
+    padding:50px 0;
+}
+.block_all_users,
+.block_all_products,
+.block_all_contacts,
+.block_all_reviews {
+    width: 80%;
+    margin:auto;
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: 1px 3px 20px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.block_all_users span,
+.block_all_contacts span,
+.block_all_products span,
+.block_all_reviews span {
+    font-size: 40px;
+    color:#81838a;
+    position: absolute;
+    bottom:10px;
+    right:20px;
+    line-height: 1;
+}
+.block_all_users h4,
+.block_all_products h4,
+.block_all_contacts h4,
+.block_all_reviews h4 {
+    padding:15px;
+    font-weight: bold;
+    color:#81838a;
+}

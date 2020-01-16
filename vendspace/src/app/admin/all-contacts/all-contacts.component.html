@@ -1,0 +1,21 @@
+<div>          
+    <table class="table table-bordered" >
+        <thead>
+        <tr>
+            <th>Contact Id</th>
+            <th>Contactor</th>
+            <th>Email</th>
+            <th>Description</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of allcontacts;index as i" >
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.description}}</td>
+            <td><button (click)="deleteContact(c)" class="btn btn-primary">&#10005;</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

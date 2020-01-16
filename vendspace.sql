@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 31, 2019 at 01:44 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 5.6.32
+-- Host: 127.0.0.1
+-- Generation Time: Aug 05, 2019 at 02:27 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,6 +37,13 @@ CREATE TABLE `address` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`id`, `address`, `address_type`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Near sant nirankari bhawan,rani bazar,bikaner,rajasthan', 'SHIPPING', 1, '2019-08-04 00:00:00', '2019-08-05 00:15:31');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +73,24 @@ CREATE TABLE `categories` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Mobile Accesories', '2019-08-04 18:05:12', '2019-08-04 12:35:12'),
+(2, 'Mobile Accesories', '2019-08-04 18:05:46', '2019-08-04 12:35:46'),
+(3, 'Mobile Accesories', '2019-08-04 18:05:49', '2019-08-04 12:35:49'),
+(4, 'Mobile Accesories', '2019-08-04 18:05:50', '2019-08-04 12:35:50'),
+(5, 'Mobile Accesories', '2019-08-04 18:05:51', '2019-08-04 12:35:51'),
+(6, 'Mobile Accesories', '2019-08-04 18:05:51', '2019-08-04 12:35:51'),
+(7, 'Mobile Accesories', '2019-08-04 18:05:51', '2019-08-04 12:35:51'),
+(8, 'Mobile Accesories', '2019-08-04 18:05:53', '2019-08-04 12:35:53'),
+(9, 'Mobile Accesories', '2019-08-04 18:05:53', '2019-08-04 12:35:53'),
+(10, 'Mobile Accesories', '2019-08-04 18:05:54', '2019-08-04 12:35:54'),
+(11, 'Mobile Accesories', '2019-08-04 18:06:42', '2019-08-04 12:36:42'),
+(12, 'Household Electronics', '2019-08-04 18:08:46', '2019-08-04 12:38:46');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +106,13 @@ CREATE TABLE `contact` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `name`, `email`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'rahul CHoudhary', 'rahul@ranosys.com', 'Your website is awesome...', '2019-08-04 19:34:31', '2019-08-04 14:04:31');
+
 -- --------------------------------------------------------
 
 --
@@ -92,7 +124,8 @@ CREATE TABLE `image` (
   `product_id` int(11) NOT NULL,
   `img_type` enum('PRODUCT','REVIEW') COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `img_url` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -112,7 +145,8 @@ CREATE TABLE `products` (
   `offer` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `average_rating` double NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `img_id` tinytext COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -163,8 +197,20 @@ CREATE TABLE `users` (
   `role` enum('USER','ADMIN') COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `address_id` tinytext COLLATE utf8_unicode_ci NOT NULL
+  `address_id` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `phone` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `role`, `created_at`, `updated_at`, `address_id`, `phone`) VALUES
+(1, 'Emilia Soni', 'emilia@yashwant.soni', 'rahul', 'ADMIN', '2019-08-04 00:00:00', '2019-08-04 12:04:22', '', 0),
+(2, 'rahul', 'rahul069cse@gmail.com', '123456', 'ADMIN', '2019-08-04 17:38:40', '2019-08-04 12:08:40', '', 9166118232),
+(3, 'rahul choudhary', 'rahul069cse@gm', '123456', 'USER', '2019-08-04 17:41:19', '2019-08-04 12:11:19', '', 91661182),
+(4, 'Yashwant', 'yashwantsoni@lice.com', '12345', 'USER', '2019-08-04 17:42:40', '2019-08-04 12:12:40', '', 91661182),
+(5, 'Yashwant ', 'yashwantsoni@lice.co', '12345', 'USER', '2019-08-04 17:43:48', '2019-08-04 12:13:48', '', 91661182);
 
 --
 -- Indexes for dumped tables
@@ -232,56 +278,47 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `shipping_details`
 --
 ALTER TABLE `shipping_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

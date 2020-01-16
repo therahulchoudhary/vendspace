@@ -1,0 +1,45 @@
+.sidebar {
+	background: #3d3736;
+	padding: 0;
+}
+.sidebar_top {
+	margin:0;
+	background: #211e1d;
+	color: white;
+	border-bottom: 1px solid #3b3534;
+}
+.signout_btn {
+	text-align: right;
+	border-left: 1px solid #3b3534;
+	padding-top: 10px;
+}
+.admin_heading {
+	margin:0;
+}
+.admin_heading h3{
+	line-height: 2;
+	margin-bottom: 0;
+}
+.sidebar_list {
+	list-style: none;
+	padding:0;
+}
+.sidebar_list li {
+	padding:10px 20px;
+	border-bottom: 1px solid #7d706e;
+	transition:all 0.2s ease;
+}
+.sidebar_list li:hover{
+	background: #8a7b79;
+}
+.sidebar_list li a{
+	color: white;
+	font-size: 20px;
+	font-weight: 100;
+}
+.sidebar_list li a:hover {
+	text-decoration: none;
+}
+.arrow {
+	float: right;
+}

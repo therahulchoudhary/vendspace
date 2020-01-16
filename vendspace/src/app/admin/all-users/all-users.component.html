@@ -1,0 +1,24 @@
+<div>          
+    <table class="table table-bordered" >
+        <thead>
+            <th>User ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Phone</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let u of allusers">
+            <td>{{u.id}}</td>
+            <td>{{u.full_name}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.password}}</td>
+            <td>{{u.role}}</td>
+            <td>{{u.phone}}</td>
+            <td><button (click)="deleteUser(u)">&#10005;</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

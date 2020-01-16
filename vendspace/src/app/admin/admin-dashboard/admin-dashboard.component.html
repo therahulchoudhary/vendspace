@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div class="row to_be_display">
+		<div class="col-md-2 sidebar">
+			<div class="row sidebar_top">
+				<div class="col-md-9 admin_heading">
+					<h3>Admin</h3>
+				</div>
+				<div class="col-md-3 signout_btn">
+					<img src="../../assets/logout.svg" width="100%">
+				</div>
+			</div>
+			<ul class="sidebar_list">
+				<li routerLink="dashboard"><a>Dashboard<span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allusers"><a>Users<span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allproducts"><a>Products <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="addproduct"><a>Add Products <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="addcategory"><a>Add Category <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allcontacts"><a>Contacts <span class="arrow">&#x2192;</span></a></li>
+				<li routerLink="allreviews"><a>Reviews <span class="arrow">&#x2192;</span></a></li>
+			</ul>
+		</div>
+		<div class="col-md-10 sidebody">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<div>          
+    <table class="table table-bordered" >
+        <thead>
+            <th>Review Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Product</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let r of allreviews">
+            <td>{{r.id}}</td>
+            <td>{{r.title}}</td>
+            <td>{{r.description}}</td>
+            <td>{{r.rating}}</td>
+            <td>{{r.product_id}}</td>
+            <td><button (click)="deleteReview(r)" class="btn btn-outline-primary">&#10005;</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
